@@ -1,0 +1,22 @@
+{
+  "name": "EventLog",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "An event log for chrome",
+  "homepage_url": "http://vhanda.in/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": ["src/main.js"]
+  },
+  "default_locale": "en",
+  "permissions": [
+    "history",
+    "idle",
+    "tabs"
+  ]
+}
