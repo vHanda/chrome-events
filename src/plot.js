@@ -44,9 +44,11 @@ storage.getAll(events => {
 
     var data = [
         {
-            x: x,
-            y: y,
-            type: 'bar'
+            x: y,
+            y: x,
+            type: 'bar',
+            orientation: 'h',
+
         }
     ];
     Plotly.newPlot('tester', data);
