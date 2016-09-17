@@ -84,19 +84,22 @@ class Storage {
 	}
 
 	getAll(callback) {
-		chrome.storage.local.get(null, callback);
+		chrome.storage.local.get(null, eventObj => {
+			var events = [];
+			// FIXME: use Object.values
+			for (var key in eventObj) {
+				events.push(eventObj[key]);
+			}
+			callback(events);
+		});
 	}
 }
 
 var storage = new Storage();
-storage.getAll(eventObj => {
-	var events = [];
-	// FIXME: use Object.values
-	for (key in eventObj) {
-		events.push(eventObj[key]);
-	}
-	timeSpentPerSite(events);
+chrome.storage.local.getBytesInUse(null, bytes => {
+	console.log("Storage Used:", bytes/1000.0/1000.0, "mb");
 });
+
 
 // Notes:
 // These events are not perfect and we will need additional events

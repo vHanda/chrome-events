@@ -6,6 +6,7 @@ function timeSpentPerSite(events) {
 	var domains = events.filter(e => e.data && e.data.url).map(e => extractDomain(e.data.url));
 	domains = Array.from(new Set(domains));
 
+	var finalResult = {};
 	domains.forEach(domain => {
 		// Converts each event into a event which says if we should start / stop
 		// counting the time
@@ -125,8 +126,10 @@ function timeSpentPerSite(events) {
 			}
 		});
 
-		console.log(domain, time / 1000.0);
+		finalResult[domain] = time;
 	});
+
+	return finalResult;
 }
 
 function extractDomain(url) {
