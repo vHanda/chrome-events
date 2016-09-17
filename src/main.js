@@ -25,8 +25,6 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 	chrome.tabs.get(activeInfo.tabId, (tab) => {
 		event.data = tab;
 		sendEvent(event);
-		console.log(tab);
-		// FIXME: Make sure the tab is active?
 	})
 });
 
@@ -50,8 +48,8 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 	var event = createEvent(EVENT_TYPE_WINDOW_FOCUSED, null);
 	chrome.windows.get(windowId, {populate: true}, (window) => {
 		event.data = window;
+		event.data.tabs = event.data.tabs.filter(tab => tab.active);
 		sendEvent(event);
-		// FIXME: Remove all info about the tabs which are not active?
 	});
 });
 
@@ -66,17 +64,11 @@ chrome.idle.onStateChanged.addListener((state) => {
 	sendEvent(event);
 });
 
-
-// FIXME: This should be converted to UTC!
-function getDateTime(timestamp) {
-	var now     = new Date(timestamp);
-	return now.toISOString();
-}
-// How can one write this to disk?
-
 function sendEvent(event) {
-	console.log(getDateTime(event.time), event.data);
+	var timeString = new Date(event.time).toISOString();
+	console.log(timeString, event.data);
 }
+
 // Notes:
 // These events are not perfect and we will need additional events
 // * Suspend Resume
