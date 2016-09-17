@@ -65,9 +65,22 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 
 function sendEvent(event) {
-	var timeString = new Date(event.time).toISOString();
-	console.log(timeString, event.data);
+	storage.save(event);
 }
+
+class Storage {
+	save(event) {
+		var data = {};
+		data[event.time] = event;
+		chrome.storage.local.set(data);
+	}
+
+	getAll(callback) {
+		chrome.storage.local.get(null, callback);
+	}
+}
+
+var storage = new Storage();
 
 // Notes:
 // These events are not perfect and we will need additional events
