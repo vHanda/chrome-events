@@ -104,7 +104,6 @@ storage.getAll(eventObj => {
 // Analytics
 //
 function timeSpentPerSite(events) {
-	// FIXME: Remove "www."
 	var domains = events.filter(e => e.data && e.data.url).map(e => extractDomain(e.data.url));
 	domains = Array.from(new Set(domains));
 
@@ -200,5 +199,8 @@ function extractDomain(url) {
     //find & remove port number
     domain = domain.split(':')[0];
 
+	if (domain.indexOf('www.') == 0) {
+		domain = domain.substr(4);
+	}
     return domain;
 }
