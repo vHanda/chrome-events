@@ -1,39 +1,88 @@
 
-// TODO: Convert the timestamp into something a bit more parseable
+var EVENT_TYPE_HISTORY_VISITED = 1;
+var EVENT_TYPE_TAB_ACTIVATED = 2;
+var EVENT_TYPE_TAB_UPDATED = 3;
+var EVENT_TYPE_WINDOW_FOCUS_LOST = 4;
+var EVENT_TYPE_WINDOW_FOCUSED = 5;
+var EVENT_TYPE_IDLE_START = 6;
+var EVENT_TYPE_IDLE_STOP = 7;
+
+function createEvent(type, data) {
+	return {
+		type: type,
+		time: Date.now(),
+		data: data
+	};
+}
+
 chrome.history.onVisited.addListener((result) => {
-	console.log("History", result);
+	var event = createEvent(EVENT_TYPE_HISTORY_VISITED, result);
+	sendEvent(event);
 });
 
-// TODO: Add the timestamp of the event!
 chrome.tabs.onActivated.addListener((activeInfo) => {
-	console.log("TabActivated", activeInfo);
+	var event = createEvent(EVENT_TYPE_TAB_ACTIVATED, activeInfo);
 	chrome.tabs.get(activeInfo.tabId, (tab) => {
-		console.log("Tab:", tab);
+		event.data = tab;
+		sendEvent(event);
+		console.log(tab);
+		// FIXME: Make sure the tab is active?
 	})
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-	console.log("Tab Updated:", tabId, changeInfo, tab);
+	var data = {
+		tabId: tabId,
+		changeInfo: changeInfo,
+		tab: tab
+	};
+	var event = createEvent(EVENT_TYPE_TAB_UPDATED, data);
+	sendEvent(event);
 });
 
-// FIXME: Get more info about this event!
 chrome.windows.onFocusChanged.addListener((windowId) => {
 	if (windowId == chrome.windows.WINDOW_ID_NONE) {
-		console.log("Lost focus");
+		var event = createEvent(EVENT_TYPE_WINDOW_FOCUS_LOST, null);
+		sendEvent(event);
 		return;
 	}
 
-	console.log("Got focus on", windowId);
+	var event = createEvent(EVENT_TYPE_WINDOW_FOCUSED, null);
 	chrome.windows.get(windowId, {populate: true}, (window) => {
-		console.log("Window", window);
+		event.data = window;
+		sendEvent(event);
+		// FIXME: Remove all info about the tabs which are not active?
 	});
 });
 
 
-// TODO: Add timestamp of event!
 chrome.idle.setDetectionInterval(30);
 chrome.idle.onStateChanged.addListener((state) => {
-	console.log("IdleState", state);
+	if (state == "idle") {
+		var event = createEvent(EVENT_TYPE_IDLE_START, null);
+	} else {
+		var event = createEvent(EVENT_TYPE_IDLE_STOP, null);
+	}
+	sendEvent(event);
 });
 
+
+// FIXME: This should be converted to UTC!
+function getDateTime(timestamp) {
+	var now     = new Date(timestamp);
+	return now.toISOString();
+}
 // How can one write this to disk?
+
+function sendEvent(event) {
+	console.log(getDateTime(event.time), event.data);
+}
+// Notes:
+// These events are not perfect and we will need additional events
+// * Suspend Resume
+// * X11 Window change
+
+
+// Since I do need a local tracker for suspend/resume and for x11
+// Perhaps I can just run a local webserver and send all the events there?
+// That can have the append only log - use nedb-logger
