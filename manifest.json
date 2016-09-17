@@ -16,6 +16,9 @@
         "src/analytics.js"
     ]
   },
+  "browser_action": {
+      "default_title": "Tracker"
+  },
   "default_locale": "en",
   "permissions": [
     "history",

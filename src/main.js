@@ -103,3 +103,7 @@ storage.getAll(eventObj => {
 // Since I do need a local tracker for suspend/resume and for x11
 // Perhaps I can just run a local webserver and send all the events there?
 // That can have the append only log - use nedb-logger
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+    chrome.tabs.create({'url': chrome.extension.getURL('src/options.html'), 'selected': true});
+});
