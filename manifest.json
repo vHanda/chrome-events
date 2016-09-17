@@ -11,7 +11,10 @@
   },
   "background": {
     "persistent": false,
-    "scripts": ["src/main.js"]
+    "scripts": [
+        "src/main.js",
+        "src/analytics.js"
+    ]
   },
   "default_locale": "en",
   "permissions": [
