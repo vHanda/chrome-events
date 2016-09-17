@@ -56,7 +56,51 @@ function timeSpentPerSite(events) {
 				}
 			}
 
-			// FIXME: Handle idle time!
+			/*
+			// Temporarily disabling idle time as it just takes input into account
+			// in order to generate the event. So when watching a video, after x
+			// seconds, we no longer count that time as active, even though it is
+			//
+			if (e.type == EVENT_TYPE_IDLE_START) {
+				if (!e.data || !e.data.tabs)
+					return
+
+				if (e.data.tabs.length != 1)
+					return;
+
+				var tab = e.data.tabs[0];
+				if (!tab.active) {
+					return;
+				}
+
+				var td = extractDomain(tab.url);
+				if (td == domain) {
+					ne.start = true;
+				} else {
+					ne.stop = true;
+				}
+			}
+
+			if (e.type == EVENT_TYPE_IDLE_STOP) {
+				if (!e.data || !e.data.tabs)
+					return
+
+				if (e.data.tabs.length != 1)
+					return;
+
+				var tab = e.data.tabs[0];
+				if (!tab.active) {
+					return;
+				}
+
+				var td = extractDomain(tab.url);
+				if (td == domain) {
+					ne.start = true;
+				} else {
+					ne.stop = true;
+				}
+			}
+			*/
 
 			if (!ne.start && !ne.stop) {
 				return;

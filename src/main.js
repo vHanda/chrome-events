@@ -65,7 +65,11 @@ chrome.idle.onStateChanged.addListener((state) => {
 	} else {
 		var event = createEvent(EVENT_TYPE_IDLE_STOP, null);
 	}
-	sendEvent(event);
+	chrome.tabs.query({active:true}, (tabs) => {
+		event.data = {};
+		event.data.tabs = tabs;
+		sendEvent(event);
+	})
 });
 
 function sendEvent(event) {
