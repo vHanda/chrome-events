@@ -16,9 +16,13 @@ function timeSpentPerSite(events) {
 			};
 
 			if (e.type == EVENT_TYPE_TAB_ACTIVATED) {
-				var ed = extractDomain(e.data.url);
-				if (ed == domain) {
-					ne.start = true;
+				if (e.data) {
+					var ed = extractDomain(e.data.url);
+					if (ed == domain) {
+						ne.start = true;
+					} else {
+						ne.stop = true;
+					}
 				} else {
 					ne.stop = true;
 				}
