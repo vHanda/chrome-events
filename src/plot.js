@@ -1,12 +1,13 @@
 
+function msToDate(msecs) {
+	return new Date(msecs).toISOString().slice(0, 10);
+}
 
 var storage = new Storage();
 storage.getAll(events => {
 	console.log("get events", events.length)
-	events = events.filter(e => {
-		d = new Date(e.time);
-		return d.toISOString().slice(0,10) == (new Date()).toISOString().slice(0,10)
-	})
+	var today = msToDate(Date.now())
+	events = events.filter(e => msToDate(e.time) == today)
 	console.log("filtered events", events.length)
 	var siteData = timeSpentPerSite(events);
 
