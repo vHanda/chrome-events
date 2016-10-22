@@ -2,6 +2,12 @@
 
 var storage = new Storage();
 storage.getAll(events => {
+	console.log("get events", events.length)
+	events = events.filter(e => {
+		d = new Date(e.time);
+		return d.toISOString().slice(0,10) == (new Date()).toISOString().slice(0,10)
+	})
+	console.log("filtered events", events.length)
 	var siteData = timeSpentPerSite(events);
 
     var x = [];
