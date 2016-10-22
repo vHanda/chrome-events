@@ -13,6 +13,7 @@
     "persistent": false,
     "scripts": [
         "src/types.js",
+        "src/storage.js",
         "src/main.js"
     ]
   },
