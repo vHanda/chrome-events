@@ -1,12 +1,4 @@
 
-var EVENT_TYPE_HISTORY_VISITED = 1;
-var EVENT_TYPE_TAB_ACTIVATED = 2;
-var EVENT_TYPE_TAB_UPDATED = 3;
-var EVENT_TYPE_WINDOW_FOCUS_LOST = 4;
-var EVENT_TYPE_WINDOW_FOCUSED = 5;
-var EVENT_TYPE_IDLE_START = 6;
-var EVENT_TYPE_IDLE_STOP = 7;
-
 function createEvent(type, data) {
 	return {
 		type: type,
@@ -73,6 +65,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 
 function sendEvent(event) {
+	console.log(type_to_string(event.type), event.data);
 	storage.save(event);
 }
 

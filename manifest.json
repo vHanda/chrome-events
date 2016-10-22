@@ -12,6 +12,7 @@
   "background": {
     "persistent": false,
     "scripts": [
+        "src/types.js",
         "src/main.js"
     ]
   },
