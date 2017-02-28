@@ -70,9 +70,6 @@ function sendEvent(event) {
 }
 
 var storage = new Storage();
-chrome.storage.local.getBytesInUse(null, bytes => {
-	console.log("Storage Used:", bytes/1000.0/1000.0, "mb");
-});
 
 
 // Notes:

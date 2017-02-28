@@ -4,6 +4,7 @@ function msToDate(msecs) {
 }
 
 var storage = new Storage();
+setTimeout(function() {
 storage.getAll(events => {
 	console.log("get events", events.length)
 	var today = msToDate(Date.now())
@@ -34,3 +35,4 @@ storage.getAll(events => {
     ];
     Plotly.newPlot('tester', data);
 });
+}, 100);

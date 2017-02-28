@@ -1,18 +1,40 @@
 class Storage {
-	save(event) {
-		var data = {};
-		data[event.time] = event;
-		chrome.storage.local.set(data);
-	}
+    constructor() {
+        var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB
+                        || window.msIndexedDB || window.shimIndexedDB;
 
-	getAll(callback) {
-		chrome.storage.local.get(null, eventObj => {
-			var events = [];
-			// FIXME: use Object.values
-			for (var key in eventObj) {
-				events.push(eventObj[key]);
-			}
-			callback(events);
-		});
-	}
+        var request = indexedDB.open("logdb", 1);
+        request.onsuccess = () => {
+            console.log("Database opened");
+            this.db = request.result
+        }
+        request.onupgradeneeded = function(event) {
+            this.db = request.result;
+            if (event.oldVersion < 1) {
+                console.log("Created the object store");
+                var store = this.db.createObjectStore("log", {keyPath: "time"});
+            }
+        }
+    }
+
+    save(event) {
+        // FIXME: Let's commit this every x seconds!
+        var tx = this.db.transaction("log", "readwrite");
+        var store = tx.objectStore("log");
+
+        console.log("Saving", event);
+        store.put(event)
+    }
+
+    // FIXME: This is shitty. It would be better to explicity specify a range!
+    getAll(callback) {
+        var tx = this.db.transaction("log", "readonly");
+        var store = tx.objectStore("log");
+
+        store.getAll().onsuccess = function(event) {
+            var result = event.target.result;
+            console.log("GOT " + result);
+            callback(result);
+        };
+    }
 }
