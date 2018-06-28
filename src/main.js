@@ -5,7 +5,7 @@ function getTimezoneOffset() {
 
 function createEvent(type, data) {
 	return {
-		type: type,
+		type: type_to_string(type),
 		t: Date.now(),
 		tz: getTimezoneOffset(),
 		data: data
@@ -61,7 +61,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 
 function sendEvent(event) {
-	console.log(type_to_string(event.type), event.data);
+	console.log(event.type, event.data);
 	storage.save(event);
 }
 
