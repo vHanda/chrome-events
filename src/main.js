@@ -1,8 +1,13 @@
+function getTimezoneOffset() {
+	// JS stores
+	return (new Date()).getTimezoneOffset() * -1 / 60.0;
+}
 
 function createEvent(type, data) {
 	return {
 		type: type,
 		t: Date.now(),
+		tz: getTimezoneOffset(),
 		data: data
 	};
 }
