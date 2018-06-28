@@ -42,7 +42,7 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 	}
 
 	var event = createEvent(EVENT_TYPE_WINDOW_FOCUSED, null);
-	chrome.windows.get(windowId, {populate: true}, (window) => {
+	chrome.windows.get(windowId, { populate: true }, (window) => {
 		event.data = window;
 		event.data.tabs = event.data.tabs.filter(tab => tab.active);
 		sendEvent(event);
@@ -57,7 +57,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 	} else {
 		var event = createEvent(EVENT_TYPE_IDLE_STOP, null);
 	}
-	chrome.tabs.query({active:true}, (tabs) => {
+	chrome.tabs.query({ active: true }, (tabs) => {
 		event.data = {};
 		event.data.tabs = tabs;
 		sendEvent(event);
@@ -82,6 +82,6 @@ var storage = new Storage();
 // Perhaps I can just run a local webserver and send all the events there?
 // That can have the append only log - use nedb-logger
 
-chrome.browserAction.onClicked.addListener(function(tab) {
-    chrome.tabs.create({'url': chrome.extension.getURL('src/options.html'), 'selected': true});
+chrome.browserAction.onClicked.addListener(function (tab) {
+	chrome.tabs.create({ 'url': chrome.extension.getURL('src/options.html'), 'selected': true });
 });

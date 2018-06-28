@@ -1,18 +1,18 @@
 class Storage {
     constructor() {
         var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB
-                        || window.msIndexedDB || window.shimIndexedDB;
+            || window.msIndexedDB || window.shimIndexedDB;
 
         var request = indexedDB.open("logdb", 1);
         request.onsuccess = () => {
             console.log("Database opened");
             this.db = request.result
         }
-        request.onupgradeneeded = function(event) {
+        request.onupgradeneeded = function (event) {
             this.db = request.result;
             if (event.oldVersion < 1) {
                 console.log("Created the object store");
-                var store = this.db.createObjectStore("log", {keyPath: "time"});
+                var store = this.db.createObjectStore("log", { keyPath: "time" });
             }
         }
     }
@@ -31,7 +31,7 @@ class Storage {
         var tx = this.db.transaction("log", "readonly");
         var store = tx.objectStore("log");
 
-        store.getAll().onsuccess = function(event) {
+        store.getAll().onsuccess = function (event) {
             var result = event.target.result;
             console.log("GOT " + result);
             callback(result);
