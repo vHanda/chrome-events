@@ -7,15 +7,6 @@ function createEvent(type, data) {
 	};
 }
 
-/*
-// We do not really need the history right now!
-// We can compute what we need with the tab + windows
-chrome.history.onVisited.addListener((result) => {
-	var event = createEvent(EVENT_TYPE_HISTORY_VISITED, result);
-	sendEvent(event);
-});
-*/
-
 chrome.tabs.onActivated.addListener((activeInfo) => {
 	var event = createEvent(EVENT_TYPE_TAB_ACTIVATED, activeInfo);
 	chrome.tabs.get(activeInfo.tabId, (tab) => {

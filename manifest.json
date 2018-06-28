@@ -23,7 +23,6 @@
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "default_locale": "en",
   "permissions": [
-    "history",
     "idle",
     "tabs",
     "storage",
