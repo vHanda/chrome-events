@@ -12,7 +12,7 @@ class Storage {
             this.db = request.result;
             if (event.oldVersion < 1) {
                 console.log("Created the object store");
-                var store = this.db.createObjectStore("log", { keyPath: "time" });
+                var store = this.db.createObjectStore("log", { keyPath: "t" });
             }
         }
     }

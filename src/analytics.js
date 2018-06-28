@@ -12,7 +12,7 @@ function timeSpentPerSite(events) {
 		// counting the time
 		var domainEvents = events.map(e => {
 			var ne = {
-				time: e.time
+				time: e.t
 			};
 
 			if (e.type == EVENT_TYPE_TAB_ACTIVATED) {
@@ -119,13 +119,13 @@ function timeSpentPerSite(events) {
 		domainEvents.forEach(e => {
 			if (e.start) {
 				if (!startTime)
-					startTime = e.time;
+					startTime = e.t;
 			} else {
 				if (!startTime) {
 					return;
 				}
 
-				time += (e.time - startTime);
+				time += (e.t - startTime);
 				startTime = null;
 			}
 		});

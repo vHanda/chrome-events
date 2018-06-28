@@ -2,7 +2,7 @@
 function createEvent(type, data) {
 	return {
 		type: type,
-		time: Date.now(),
+		t: Date.now(),
 		data: data
 	};
 }

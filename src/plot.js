@@ -8,7 +8,7 @@ setTimeout(function () {
     storage.getAll(events => {
         console.log("get events", events.length)
         var today = msToDate(Date.now())
-        events = events.filter(e => msToDate(e.time) == today)
+        events = events.filter(e => msToDate(e.t) == today)
         console.log("filtered events", events.length)
         var siteData = timeSpentPerSite(events);
 
