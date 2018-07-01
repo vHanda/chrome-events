@@ -25,6 +25,7 @@
     "idle",
     "tabs",
     "storage",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "<all_urls>"
   ]
 }

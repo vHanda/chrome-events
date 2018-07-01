@@ -37,4 +37,17 @@ class Storage {
             callback(result);
         };
     }
+
+    clear(callback) {
+        callback = callback || function () { };
+
+        const tx = this.db.transaction("log", "readwrite");
+        const store = tx.objectStore("log");
+        store.clear().onsuccess = event => {
+            console.log("Cleared store", event);
+            callback();
+        }
+
+        // FIXME: Handle errors!
+    }
 }

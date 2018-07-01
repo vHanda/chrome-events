@@ -81,3 +81,39 @@ var storage = new Storage();
 chrome.browserAction.onClicked.addListener(function (tab) {
 	chrome.tabs.create({ 'url': chrome.extension.getURL('src/options.html'), 'selected': true });
 });
+
+function sendEventsToServer(events, cb) {
+	const chromeEvents = {
+		id: 'boo',
+		events: events,
+	};
+	const url = "http://127.0.0.1:8080/chrome";
+	fetch(url, {
+		method: "POST",
+		body: JSON.stringify(chromeEvents),
+	}).then(response => {
+		console.log(response.text);
+		cb();
+	}).catch(err => {
+		console.log("Got an error", err);
+		cb(err);
+	});
+}
+
+function sync() {
+	storage.getAll(events => {
+		if (events.length == 0) {
+			return;
+		}
+
+		console.log("Sending", events.length);
+		sendEventsToServer(events, err => {
+			if (err) {
+				return;
+			}
+			storage.clear();
+		});
+	});
+}
+
+setTimeout(sync, 5000);
