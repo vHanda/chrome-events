@@ -12,9 +12,9 @@
   "background": {
     "persistent": false,
     "scripts": [
-      "src/types.js",
-      "src/storage.js",
-      "src/main.js"
+      "dist/types.js",
+      "dist/storage.js",
+      "dist/main.js"
     ]
   },
   "browser_action": {

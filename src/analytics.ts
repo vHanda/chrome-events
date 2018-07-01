@@ -11,7 +11,7 @@ function timeSpentPerSite(events) {
 		// Converts each event into a event which says if we should start / stop
 		// counting the time
 		var domainEvents = events.map(e => {
-			var ne = {
+			var ne: any = {
 				time: e.t
 			};
 

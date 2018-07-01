@@ -1,0 +1,23 @@
+{
+  "name": "chrome-events",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@types/plotly.js": "^1.38.3"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.0.69"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vHanda/chrome-events.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vHanda/chrome-events/issues"
+  },
+  "homepage": "https://github.com/vHanda/chrome-events#readme"
+}

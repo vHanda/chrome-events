@@ -1,14 +1,15 @@
-class Storage {
+class LocalStorage {
+    db: any;
+
     constructor() {
-        var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB
-            || window.msIndexedDB || window.shimIndexedDB;
+        var indexedDB = window.indexedDB;
 
         var request = indexedDB.open("logdb", 1);
         request.onsuccess = () => {
             console.log("Database opened");
             this.db = request.result
         }
-        request.onupgradeneeded = function (event) {
+        request.onupgradeneeded = (event) => {
             this.db = request.result;
             if (event.oldVersion < 1) {
                 console.log("Created the object store");

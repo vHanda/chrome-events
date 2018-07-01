@@ -65,7 +65,7 @@ function sendEvent(event) {
 	storage.save(event);
 }
 
-var storage = new Storage();
+var storage = new LocalStorage();
 
 
 // Notes:
@@ -111,7 +111,7 @@ function sync() {
 			if (err) {
 				return;
 			}
-			storage.clear();
+			storage.clear(() => { });
 		});
 	});
 }
