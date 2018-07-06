@@ -1,0 +1,58 @@
+{
+    "namespace": "chrome.vhanda.github.com",
+    "type": "record",
+    "name": "Tab",
+    "fields": [
+        {
+            "name": "id",
+            "type": "int"
+        },
+        {
+            "name": "index",
+            "type": "int"
+        },
+        {
+            "name": "windowId",
+            "type": "int"
+        },
+        {
+            "name": "highlighted",
+            "type": "boolean"
+        },
+        {
+            "name": "active",
+            "type": "boolean"
+        },
+        {
+            "name": "pinned",
+            "type": "boolean"
+        },
+        {
+            "name": "url",
+            "type": "string"
+        },
+        {
+            "name": "title",
+            "type": "string"
+        },
+        {
+            "name": "incognito",
+            "type": "boolean"
+        },
+        {
+            "name": "audible",
+            "type": "boolean"
+        },
+        {
+            "name": "status",
+            "type": {
+                "type": "enum",
+                "name": "TabStatus",
+                "symbols": [
+                    "loading",
+                    "complete"
+                ]
+            }
+        }
+    ]
+}

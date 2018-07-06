@@ -1,0 +1,24 @@
+{
+    "namespace": "chrome.vhanda.github.com",
+    "type": "record",
+    "name": "TabActivated",
+    "fields": [
+        {
+            "name": "activeInfo",
+            "type": {
+                "name": "ActiveInfo",
+                "type": "record",
+                "fields": [
+                    {
+                        "name": "tabId",
+                        "type": "int"
+                    },
+                    {
+                        "name": "windowId",
+                        "type": "int"
+                    }
+                ]
+            }
+        }
+    ]
+}

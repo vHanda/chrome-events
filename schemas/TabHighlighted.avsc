@@ -1,0 +1,14 @@
+{
+    "namespace": "chrome.vhanda.github.com",
+    "type": "record",
+    "name": "TabHighlighted",
+    "fields": [
+        {
+            "name": "tabIds",
+            "type": {
+                "type": "array",
+                "items": "int"
+            }
+        }
+    ]
+}

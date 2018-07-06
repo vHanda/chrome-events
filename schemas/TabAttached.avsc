@@ -1,0 +1,24 @@
+{
+    "namespace": "chrome.vhanda.github.com",
+    "type": "record",
+    "name": "TabAttached",
+    "fields": [
+        {
+            "name": "attachInfo",
+            "type": {
+                "name": "AttachInfo",
+                "type": "record",
+                "fields": [
+                    {
+                        "name": "newWindowId",
+                        "type": "int"
+                    },
+                    {
+                        "name": "newPosition",
+                        "type": "int"
+                    }
+                ]
+            }
+        }
+    ]
+}

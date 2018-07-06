@@ -1,0 +1,11 @@
+{
+    "namespace": "chrome.vhanda.github.com",
+    "type": "record",
+    "name": "WindowRemoved",
+    "fields": [
+        {
+            "name": "id",
+            "type": "int"
+        }
+    ]
+}

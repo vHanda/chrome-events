@@ -1,0 +1,11 @@
+{
+    "namespace": "chrome.vhanda.github.com",
+    "type": "record",
+    "name": "WindowFocused",
+    "fields": [
+        {
+            "name": "id",
+            "type": "int"
+        }
+    ]
+}

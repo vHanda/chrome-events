@@ -1,0 +1,24 @@
+{
+    "namespace": "chrome.vhanda.github.com",
+    "type": "record",
+    "name": "TabRemoved",
+    "fields": [
+        {
+            "name": "removeInfo",
+            "type": {
+                "name": "RemoveInfo",
+                "type": "record",
+                "fields": [
+                    {
+                        "name": "windowId",
+                        "type": "int"
+                    },
+                    {
+                        "name": "isWindowClosing",
+                        "type": "boolean"
+                    }
+                ]
+            }
+        }
+    ]
+}
