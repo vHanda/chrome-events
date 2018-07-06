@@ -1,0 +1,245 @@
+[
+    {
+        "namespace": "chrome.vhanda.github.com",
+        "type": "record",
+        "name": "Tab",
+        "fields": [
+            {
+                "name": "id",
+                "type": "int"
+            },
+            {
+                "name": "index",
+                "type": "int"
+            },
+            {
+                "name": "windowId",
+                "type": "int"
+            },
+            {
+                "name": "highlighted",
+                "type": "boolean"
+            },
+            {
+                "name": "active",
+                "type": "boolean"
+            },
+            {
+                "name": "pinned",
+                "type": "boolean"
+            },
+            {
+                "name": "url",
+                "type": "string"
+            },
+            {
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "name": "incognito",
+                "type": "boolean"
+            },
+            {
+                "name": "audible",
+                "type": "boolean"
+            },
+            {
+                "name": "status",
+                "type": {
+                    "type": "enum",
+                    "name": "TabStatus",
+                    "symbols": [
+                        "loading",
+                        "complete"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "namespace": "chrome.vhanda.github.com",
+        "type": "record",
+        "name": "TabCreated",
+        "fields": [
+            {
+                "name": "tab",
+                "type": "Tab.chrome.vhanda.github.com"
+            }
+        ]
+    },
+    {
+        "namespace": "chrome.vhanda.github.com",
+        "type": "record",
+        "name": "TabUpdated",
+        "fields": [
+            {
+                "name": "changeInfo",
+                "type": {
+                    "name": "ChangeInfo",
+                    "type": "record",
+                    "fields": [
+                        {
+                            "name": "status",
+                            "type": "string"
+                        },
+                        {
+                            "name": "url",
+                            "type": "string"
+                        },
+                        {
+                            "name": "title",
+                            "type": "string"
+                        },
+                        {
+                            "name": "pinned",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "audible",
+                            "type": "boolean"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "namespace": "chrome.vhanda.github.com",
+        "type": "record",
+        "name": "TabMoved",
+        "fields": [
+            {
+                "name": "moveInfo",
+                "type": {
+                    "name": "MoveInfo",
+                    "type": "record",
+                    "fields": [
+                        {
+                            "name": "windowId",
+                            "type": "int"
+                        },
+                        {
+                            "name": "fromIndex",
+                            "type": "int"
+                        },
+                        {
+                            "name": "toIndex",
+                            "type": "int"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "namespace": "chrome.vhanda.github.com",
+        "type": "record",
+        "name": "TabActivated",
+        "fields": [
+            {
+                "name": "activeInfo",
+                "type": {
+                    "name": "ActiveInfo",
+                    "type": "record",
+                    "fields": [
+                        {
+                            "name": "tabId",
+                            "type": "int"
+                        },
+                        {
+                            "name": "windowId",
+                            "type": "int"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "namespace": "chrome.vhanda.github.com",
+        "type": "record",
+        "name": "TabHighlighted",
+        "fields": [
+            {
+                "name": "tabIds",
+                "type": {
+                    "type": "array",
+                    "items": "int"
+                }
+            }
+        ]
+    },
+    {
+        "namespace": "chrome.vhanda.github.com",
+        "type": "record",
+        "name": "TabDetached",
+        "fields": [
+            {
+                "name": "detachInfo",
+                "type": {
+                    "name": "DetachInfo",
+                    "type": "record",
+                    "fields": [
+                        {
+                            "name": "oldWindowId",
+                            "type": "int"
+                        },
+                        {
+                            "name": "oldPosition",
+                            "type": "int"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "namespace": "chrome.vhanda.github.com",
+        "type": "record",
+        "name": "TabAttached",
+        "fields": [
+            {
+                "name": "attachInfo",
+                "type": {
+                    "name": "AttachInfo",
+                    "type": "record",
+                    "fields": [
+                        {
+                            "name": "newWindowId",
+                            "type": "int"
+                        },
+                        {
+                            "name": "newPosition",
+                            "type": "int"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "namespace": "chrome.vhanda.github.com",
+        "type": "record",
+        "name": "TabRemoved",
+        "fields": [
+            {
+                "name": "removeInfo",
+                "type": {
+                    "name": "RemoveInfo",
+                    "type": "record",
+                    "fields": [
+                        {
+                            "name": "windowId",
+                            "type": "int"
+                        },
+                        {
+                            "name": "isWindowClosing",
+                            "type": "boolean"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+]
