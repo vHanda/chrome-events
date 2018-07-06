@@ -7,7 +7,8 @@
     "@types/plotly.js": "^1.38.3"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.69"
+    "@types/chrome": "0.0.69",
+    "typescript": "^2.9.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
