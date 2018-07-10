@@ -3,7 +3,10 @@ function msToDate(msecs) {
     return new Date(msecs).toISOString().slice(0, 10);
 }
 
+import { LocalStorage } from "./storage";
 var storage = new LocalStorage();
+
+/*
 setTimeout(function () {
     storage.getAll(events => {
         console.log("get events", events.length)
@@ -34,3 +37,5 @@ setTimeout(function () {
         Plotly.newPlot('tester', data);
     });
 }, 100);
+
+*/

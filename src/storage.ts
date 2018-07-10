@@ -1,4 +1,4 @@
-class LocalStorage {
+export class LocalStorage {
     db: any;
 
     constructor() {

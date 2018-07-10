@@ -12,9 +12,8 @@
   "background": {
     "persistent": false,
     "scripts": [
-      "dist/types.js",
-      "dist/storage.js",
-      "dist/main.js"
+      "src/3rdParty/almond.js",
+      "dist/background.js"
     ]
   },
   "browser_action": {

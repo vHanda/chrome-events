@@ -65,6 +65,7 @@ function sendEvent(event) {
 	storage.save(event);
 }
 
+import { LocalStorage } from "./storage";
 var storage = new LocalStorage();
 
 
