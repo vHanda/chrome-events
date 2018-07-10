@@ -21,6 +21,11 @@
             "default": ""
         },
         {
+            "name": "machineID",
+            "type": "string",
+            "default": ""
+        },
+        {
             "name": "eventType",
             "type": "string"
         },

@@ -1,7 +1,7 @@
-var EVENT_TYPE_HISTORY_VISITED = 1;
-var EVENT_TYPE_TAB_ACTIVATED = 2;
+export var EVENT_TYPE_HISTORY_VISITED = 1;
+export var EVENT_TYPE_TAB_ACTIVATED = 2;
 // data = tab
-var EVENT_TYPE_TAB_UPDATED = 3;
+export var EVENT_TYPE_TAB_UPDATED = 3;
 // data.tab
 //   id
 //   index
@@ -15,18 +15,18 @@ var EVENT_TYPE_TAB_UPDATED = 3;
 //   url
 // data.tabId
 // changeInfo
-var EVENT_TYPE_WINDOW_FOCUS_LOST = 4;
+export var EVENT_TYPE_WINDOW_FOCUS_LOST = 4;
 // none
-var EVENT_TYPE_WINDOW_FOCUSED = 5;
+export var EVENT_TYPE_WINDOW_FOCUSED = 5;
 // data.id
 // data.state == maximized
 // date.tabs
-var EVENT_TYPE_IDLE_START = 6;
+export var EVENT_TYPE_IDLE_START = 6;
 // tabs
-var EVENT_TYPE_IDLE_STOP = 7;
+export var EVENT_TYPE_IDLE_STOP = 7;
 // tabs
 
-function type_to_string(type) {
+export function type_to_string(type) {
 	switch (type) {
 		case EVENT_TYPE_HISTORY_VISITED:
 			return "EVENT_TYPE_HISTORY_VISITED";

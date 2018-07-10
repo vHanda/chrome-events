@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-        "module": "amd",
+        "module": "commonjs",
         "target": "es6",
         "noImplicitAny": false,
         "sourceMap": true,
         "rootDir": "src",
-        "outFile": "dist/background.js",
+        "outDir": "dist/",
         "noEmitOnError": true
     }
 }

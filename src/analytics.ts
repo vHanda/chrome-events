@@ -1,6 +1,7 @@
 //
 // Analytics
 //
+import * as types from "./types";
 
 function timeSpentPerSite(events) {
 	var domains = events.filter(e => e.data && e.data.url).map(e => extractDomain(e.data.url));
@@ -15,7 +16,7 @@ function timeSpentPerSite(events) {
 				time: e.t
 			};
 
-			if (e.type == EVENT_TYPE_TAB_ACTIVATED) {
+			if (e.type == types.EVENT_TYPE_TAB_ACTIVATED) {
 				if (e.data) {
 					var ed = extractDomain(e.data.url);
 					if (ed == domain) {
@@ -28,7 +29,7 @@ function timeSpentPerSite(events) {
 				}
 			}
 
-			if (e.type == EVENT_TYPE_WINDOW_FOCUSED) {
+			if (e.type == types.EVENT_TYPE_WINDOW_FOCUSED) {
 				var tabs = e.data.tabs;
 				tabs.forEach(tab => {
 					if (!tab.active) {
@@ -43,11 +44,11 @@ function timeSpentPerSite(events) {
 				});
 			}
 
-			if (e.type == EVENT_TYPE_WINDOW_FOCUS_LOST) {
+			if (e.type == types.EVENT_TYPE_WINDOW_FOCUS_LOST) {
 				ne.start = false;
 			}
 
-			if (e.type == EVENT_TYPE_TAB_UPDATED) {
+			if (e.type == types.EVENT_TYPE_TAB_UPDATED) {
 				var tab = e.data.tab;
 				if (!tab.active) {
 					return;

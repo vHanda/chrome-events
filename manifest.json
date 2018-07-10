@@ -12,12 +12,8 @@
   "background": {
     "persistent": false,
     "scripts": [
-      "src/3rdParty/almond.js",
-      "dist/background.js"
+      "dist/bundle.js"
     ]
-  },
-  "browser_action": {
-    "default_title": "Tracker"
   },
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "permissions": [
