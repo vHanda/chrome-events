@@ -64,6 +64,70 @@
         "complete"
       ]
     },
+    "TabActivated": {
+      "type": "object",
+      "required": [
+        "activeInfo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "activeInfo": {
+          "$ref": "#/definitions/ActiveInfo"
+        }
+      }
+    },
+    "ActiveInfo": {
+      "type": "object",
+      "required": [
+        "tabId",
+        "windowId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "tabId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "windowId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    },
+    "TabAttached": {
+      "type": "object",
+      "required": [
+        "attachInfo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "attachInfo": {
+          "$ref": "#/definitions/AttachInfo"
+        }
+      }
+    },
+    "AttachInfo": {
+      "type": "object",
+      "required": [
+        "newWindowId",
+        "newPosition"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "newWindowId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "newPosition": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    },
     "TabCreated": {
       "type": "object",
       "additionalProperties": false,
@@ -73,6 +137,163 @@
       "properties": {
         "tab": {
           "$ref": "#/definitions/Tab"
+        }
+      }
+    },
+    "TabDetached": {
+      "type": "object",
+      "required": [
+        "detachInfo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "detachInfo": {
+          "$ref": "#/definitions/DetachInfo"
+        }
+      }
+    },
+    "DetachInfo": {
+      "type": "object",
+      "required": [
+        "oldWindowId",
+        "oldPosition"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "oldWindowId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "oldPosition": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    },
+    "TabHighlighted": {
+      "type": "object",
+      "required": [
+        "tabIds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "tabIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          }
+        }
+      }
+    },
+    "TabMoved": {
+      "type": "object",
+      "required": [
+        "moveInfo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "moveInfo": {
+          "$ref": "#/definitions/MoveInfo"
+        }
+      }
+    },
+    "MoveInfo": {
+      "type": "object",
+      "required": [
+        "windowId",
+        "fromIndex",
+        "toIndex"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "windowId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "fromIndex": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "toIndex": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    },
+    "TabRemoved": {
+      "type": "object",
+      "required": [
+        "removeInfo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "removeInfo": {
+          "$ref": "#/definitions/RemoveInfo"
+        }
+      }
+    },
+    "RemoveInfo": {
+      "type": "object",
+      "required": [
+        "windowId",
+        "isWindowClosing"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "windowId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "isWindowClosing": {
+          "type": "boolean"
+        }
+      }
+    },
+    "TabUpdated": {
+      "type": "object",
+      "required": [
+        "changeInfo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "changeInfo": {
+          "$ref": "#/definitions/ChangeInfo"
+        }
+      }
+    },
+    "ChangeInfo": {
+      "type": "object",
+      "required": [
+        "status",
+        "url",
+        "title",
+        "pinned",
+        "audible"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "pinned": {
+          "type": "boolean"
+        },
+        "audible": {
+          "type": "boolean"
         }
       }
     }
