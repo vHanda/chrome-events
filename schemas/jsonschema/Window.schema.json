@@ -29,6 +29,46 @@
                     "type": "boolean"
                 }
             }
+        },
+        "WindowCreated": {
+            "type": "object",
+            "required": [
+                "window"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "window": {
+                    "$ref": "#/definitions/Window"
+                }
+            }
+        },
+        "WindowFocused": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                }
+            }
+        },
+        "WindowRemoved": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                }
+            }
         }
     }
 }
