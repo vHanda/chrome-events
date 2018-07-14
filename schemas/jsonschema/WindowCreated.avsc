@@ -1,0 +1,11 @@
+{
+    "namespace": "chrome.vhanda.github.com",
+    "type": "record",
+    "name": "WindowCreated",
+    "fields": [
+        {
+            "name": "window",
+            "type": "Window.chrome.vhanda.github.com"
+        }
+    ]
+}

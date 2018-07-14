@@ -1,0 +1,42 @@
+{
+  "definitions": {
+    "TabMoved": {
+      "type": "object",
+      "required": [
+        "moveInfo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "moveInfo": {
+          "$ref": "#/definitions/MoveInfo"
+        }
+      }
+    },
+    "MoveInfo": {
+      "type": "object",
+      "required": [
+        "windowId",
+        "fromIndex",
+        "toIndex"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "windowId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "fromIndex": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "toIndex": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  }
+}

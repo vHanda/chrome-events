@@ -1,0 +1,44 @@
+{
+    "definitions": {
+        "TabUpdated": {
+            "type": "object",
+            "required": [
+                "changeInfo"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "changeInfo": {
+                    "$ref": "#/definitions/ChangeInfo"
+                }
+            }
+        },
+        "ChangeInfo": {
+            "type": "object",
+            "required": [
+                "status",
+                "url",
+                "title",
+                "pinned",
+                "audible"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "pinned": {
+                    "type": "boolean"
+                },
+                "audible": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "definitions": {
+        "WindowRemoved": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                }
+            }
+        }
+    }
+}

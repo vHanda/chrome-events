@@ -1,0 +1,51 @@
+{
+  "definitions": {
+    "Event": {
+      "type": "object",
+      "required": [
+        "ts",
+        "tz",
+        "service",
+        "machineID",
+        "eventType",
+        "eventData"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ts": {
+          "type": "integer",
+          "minimum": -9223372036854775808,
+          "maximum": 9223372036854775807
+        },
+        "tz": {
+          "type": "integer",
+          "minimum": -12,
+          "maximum": 12
+        },
+        "service": {
+          "default": "",
+          "type": "string"
+        },
+        "machineID": {
+          "default": "",
+          "type": "string"
+        },
+        "eventType": {
+          "type": "string"
+        },
+        "eventData": {
+          "default": null,
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^[\u0000-ÿ]*$"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

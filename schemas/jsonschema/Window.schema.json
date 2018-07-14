@@ -1,0 +1,34 @@
+{
+    "definitions": {
+        "Window": {
+            "type": "object",
+            "required": [
+                "id",
+                "windowType",
+                "windowState",
+                "incognito",
+                "focused"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                },
+                "windowType": {
+                    "type": "string"
+                },
+                "windowState": {
+                    "type": "string"
+                },
+                "incognito": {
+                    "type": "boolean"
+                },
+                "focused": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

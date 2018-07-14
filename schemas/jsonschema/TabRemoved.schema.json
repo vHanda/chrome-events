@@ -1,0 +1,34 @@
+{
+  "definitions": {
+    "TabRemoved": {
+      "type": "object",
+      "required": [
+        "removeInfo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "removeInfo": {
+          "$ref": "#/definitions/RemoveInfo"
+        }
+      }
+    },
+    "RemoveInfo": {
+      "type": "object",
+      "required": [
+        "windowId",
+        "isWindowClosing"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "windowId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "isWindowClosing": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
