@@ -6,7 +6,6 @@
         "ts",
         "tz",
         "service",
-        "machineID",
         "eventType",
         "eventData"
       ],

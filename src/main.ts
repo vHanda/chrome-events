@@ -20,7 +20,6 @@ function createEvent(type: Number, data): Event {
 
 		// FIXME!
 		service: "chrome",
-		machineID: "1",
 	}
 }
 
