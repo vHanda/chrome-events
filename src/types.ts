@@ -1,7 +1,6 @@
 export var EVENT_TYPE_HISTORY_VISITED = 1;
 export var EVENT_TYPE_TAB_ACTIVATED = 2;
 export var EVENT_TYPE_TAB_UPDATED = 3;
-export var EVENT_TYPE_WINDOW_FOCUS_LOST = 4;
 export var EVENT_TYPE_WINDOW_FOCUSED = 5;
 export var EVENT_TYPE_IDLE_START = 6;
 export var EVENT_TYPE_IDLE_STOP = 7;
@@ -9,7 +8,8 @@ export var EVENT_TYPE_TAB_MOVED = 9;
 export var EVENT_TYPE_TAB_HIGHLIGHTED = 10;
 export var EVENT_TYPE_TAB_DETACHED = 11;
 export var EVENT_TYPE_TAB_ATTACHED = 12;
-export var EVENT_TYPE_TAB_REMOVED = 13;
+export var EVENT_TYPE_TAB_REMOVED = 13;;
+export var EVENT_TYPE_WINDOW_CREATED = 14;
 
 export function type_to_string(type) {
 	switch (type) {
@@ -19,8 +19,6 @@ export function type_to_string(type) {
 			return "EVENT_TYPE_TAB_ACTIVATED";
 		case EVENT_TYPE_TAB_UPDATED:
 			return "EVENT_TYPE_TAB_UPDATED";
-		case EVENT_TYPE_WINDOW_FOCUS_LOST:
-			return "EVENT_TYPE_WINDOW_FOCUS_LOST";
 		case EVENT_TYPE_WINDOW_FOCUSED:
 			return "EVENT_TYPE_WINDOW_FOCUSED";
 		case EVENT_TYPE_IDLE_START:
@@ -36,6 +34,8 @@ export function type_to_string(type) {
 		case EVENT_TYPE_TAB_ATTACHED:
 			return "EVENT_TYPE_TYPE_ATACHED";
 		case EVENT_TYPE_TAB_REMOVED:
+			return "EVENT_TYPE_TAB_REMOVED";
+		case EVENT_TYPE_WINDOW_CREATED:
 			return "EVENT_TYPE_TAB_REMOVED";
 		default:
 			return "UNKNOWN";

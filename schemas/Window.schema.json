@@ -3,11 +3,9 @@
         "Window": {
             "type": "object",
             "required": [
-                "id",
-                "windowType",
-                "windowState",
                 "incognito",
-                "focused"
+                "focused",
+                "alwaysOnTop"
             ],
             "additionalProperties": false,
             "properties": {
@@ -17,18 +15,51 @@
                     "maximum": 2147483647
                 },
                 "windowType": {
-                    "type": "string"
+                    "$ref": "#/definitions/WindowType"
                 },
                 "windowState": {
-                    "type": "string"
+                    "$ref": "#/definitions/WindowState"
                 },
                 "incognito": {
                     "type": "boolean"
                 },
                 "focused": {
                     "type": "boolean"
+                },
+                "top": {
+                    "type": "integer"
+                },
+                "left": {
+                    "type": "integer"
+                },
+                "width": {
+                    "type": "integer"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "alwaysOnTop": {
+                    "type": "boolean"
                 }
             }
+        },
+        "WindowType": {
+            "enum": [
+                "normal",
+                "popup",
+                "panel",
+                "app",
+                "devtools"
+            ]
+        },
+        "WindowState": {
+            "enum": [
+                "normal",
+                "minimized",
+                "maximized",
+                "fullscreen",
+                "docked"
+            ]
         },
         "WindowCreated": {
             "type": "object",

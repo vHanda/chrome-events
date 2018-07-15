@@ -4,6 +4,17 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+/**
+ * This interface was referenced by `WindowSchema`'s JSON-Schema
+ * via the `definition` "WindowType".
+ */
+export type WindowType = "normal" | "popup" | "panel" | "app" | "devtools";
+/**
+ * This interface was referenced by `WindowSchema`'s JSON-Schema
+ * via the `definition` "WindowState".
+ */
+export type WindowState = "normal" | "minimized" | "maximized" | "fullscreen" | "docked";
+
 export interface WindowSchema {
   [k: string]: any;
 }
@@ -12,11 +23,16 @@ export interface WindowSchema {
  * via the `definition` "Window".
  */
 export interface Window {
-  id: number;
-  windowType: string;
-  windowState: string;
+  id?: number;
+  windowType?: WindowType;
+  windowState?: WindowState;
   incognito: boolean;
   focused: boolean;
+  top?: number;
+  left?: number;
+  width?: number;
+  height?: number;
+  alwaysOnTop: boolean;
 }
 /**
  * This interface was referenced by `WindowSchema`'s JSON-Schema

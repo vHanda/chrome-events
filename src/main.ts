@@ -1,7 +1,7 @@
 import * as types from "./types";
 
 import { Tab, TabCreated, ActiveInfo, TabActivated, TabUpdated, TabMoved, TabHighlighted, TabDetached, TabRemoved, TabAttached } from "./schemas/Tab";
-import { Window } from "./schemas/Window";
+import { Window, WindowCreated, WindowRemoved, WindowFocused } from "./schemas/Window";
 import { Event } from "./schemas/Event";
 
 function getTimezoneOffset() {
@@ -112,20 +112,40 @@ chrome.tabs.onRemoved.addListener((tabId: number, removeInfo) => {
 });
 
 
-/*
-// FIXME: Connect each chrome.windows events!
-chrome.windows.onFocusChanged.addListener((windowId) => {
-	if (windowId == chrome.windows.WINDOW_ID_NONE) {
-		var event = createEvent(types.EVENT_TYPE_WINDOW_FOCUS_LOST, null);
-		sendEvent(event);
-		return;
-	}
+//
+// Window
+//
 
-	var event = createEvent(types.EVENT_TYPE_WINDOW_FOCUSED, windowId);
+chrome.windows.onCreated.addListener((window) => {
+	var data: WindowCreated = {
+		window: window
+	};
+	var event = createEvent(types.EVENT_TYPE_WINDOW_CREATED, data);
 	sendEvent(event);
 });
 
+chrome.windows.onRemoved.addListener((windowId: number) => {
+	var data: WindowRemoved = {
+		id: windowId
+	};
+	var event = createEvent(types.EVENT_TYPE_TAB_REMOVED, data);
+	sendEvent(event);
+});
 
+chrome.windows.onFocusChanged.addListener((windowId: number) => {
+	var data: WindowFocused = {
+		id: windowId
+	};
+
+	var event = createEvent(types.EVENT_TYPE_WINDOW_FOCUSED, null);
+	sendEvent(event);
+});
+
+//
+// IDLE
+//
+
+/*
 chrome.idle.setDetectionInterval(30);
 chrome.idle.onStateChanged.addListener((state) => {
 	if (state == "idle") {

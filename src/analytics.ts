@@ -44,9 +44,9 @@ function timeSpentPerSite(events) {
 				});
 			}
 
-			if (e.type == types.EVENT_TYPE_WINDOW_FOCUS_LOST) {
-				ne.start = false;
-			}
+			//if (e.type == types.EVENT_TYPE_WINDOW_FOCUS_LOST) {
+			//	ne.start = false;
+			//}
 
 			if (e.type == types.EVENT_TYPE_TAB_UPDATED) {
 				var tab = e.data.tab;
