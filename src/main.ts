@@ -52,9 +52,10 @@ chrome.idle.onStateChanged.addListener((state) => {
 	}
 	sendEvent(event);
 });
+*/
 
-function sendEvent(event) {
-	console.log(event.type, event.data);
+function sendEvent(event: Event) {
+	console.log("sendEvent", event.eventType, event.eventData);
 	storage.save(event);
 }
 

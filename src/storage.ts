@@ -1,3 +1,5 @@
+import { Event } from "./schemas/Event";
+
 export class LocalStorage {
     db: any;
 
@@ -13,12 +15,12 @@ export class LocalStorage {
             this.db = request.result;
             if (event.oldVersion < 1) {
                 console.log("Created the object store");
-                var store = this.db.createObjectStore("log", { keyPath: "t" });
+                var store = this.db.createObjectStore("log", { keyPath: "ts" });
             }
         }
     }
 
-    save(event) {
+    save(event: Event) {
         // FIXME: Let's commit this every x seconds!
         var tx = this.db.transaction("log", "readwrite");
         var store = tx.objectStore("log");
