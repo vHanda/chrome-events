@@ -1,6 +1,6 @@
 import * as types from "./types";
 
-import { Tab, TabCreated, ActiveInfo, TabActivated, TabUpdated, TabMoved, TabHighlighted, TabDetached, TabRemoved, TabAttached } from "./schemas/Tab";
+import { Tab, MutedInfoReason, TabCreated, ActiveInfo, TabActivated, TabUpdated, TabMoved, TabHighlighted, TabDetached, TabRemoved, TabAttached, MutedInfo } from "./schemas/Tab";
 import { Window, WindowCreated, WindowRemoved, WindowFocused } from "./schemas/Window";
 import { Event } from "./schemas/Event";
 import { IdleState, IdleStateChanged } from "./schemas/Idle";
@@ -24,6 +24,20 @@ function createEvent(type: Number, data): Event {
 }
 
 chrome.tabs.onCreated.addListener((t) => {
+	var reason: MutedInfoReason;
+	var r = t.mutedInfo.reason;
+	if (r == "user") {
+		reason = "user"
+	} else if (r == "capture") {
+		reason = "capture";
+	} else if (r == "exntension") {
+		reason = "exntension";
+	}
+	var mutedInfo: MutedInfo = {
+		muted: t.mutedInfo.muted,
+		reason: reason,
+	}
+
 	var tab: Tab = {
 		id: t.id,
 		index: t.index,
@@ -32,11 +46,15 @@ chrome.tabs.onCreated.addListener((t) => {
 		active: t.active,
 		pinned: t.pinned,
 		url: t.url,
+		faviconUrl: t.favIconUrl,
 		title: t.title,
 		incognito: t.incognito,
 		audible: t.audible,
 		status: t.status == 'loading' ? "loading" : "complete",
-	}
+		discarded: t.discarded,
+		autoDiscardable: t.autoDiscardable,
+		mutedInfo: mutedInfo,
+	};
 	var eventData: TabCreated = {
 		tab: tab,
 	};

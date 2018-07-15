@@ -3,17 +3,14 @@
     "Tab": {
       "type": "object",
       "required": [
-        "id",
         "index",
         "windowId",
         "highlighted",
         "active",
         "pinned",
-        "url",
-        "title",
-        "incognito",
-        "audible",
-        "status"
+        "discarded",
+        "autoDiscardable",
+        "incognito"
       ],
       "additionalProperties": false,
       "properties": {
@@ -32,6 +29,11 @@
           "minimum": -2147483648,
           "maximum": 2147483647
         },
+        "openerId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
         "highlighted": {
           "type": "boolean"
         },
@@ -41,20 +43,38 @@
         "pinned": {
           "type": "boolean"
         },
+        "audible": {
+          "type": "boolean"
+        },
+        "discarded": {
+          "type": "boolean"
+        },
+        "autoDiscardable": {
+          "type": "boolean"
+        },
+        "mutedInfo": {
+          "$ref": "#/definitions/MutedInfo"
+        },
         "url": {
           "type": "string"
         },
         "title": {
           "type": "string"
         },
-        "incognito": {
-          "type": "boolean"
-        },
-        "audible": {
-          "type": "boolean"
+        "faviconUrl": {
+          "type": "string"
         },
         "status": {
           "$ref": "#/definitions/TabStatus"
+        },
+        "incognito": {
+          "type": "boolean"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
         }
       }
     },
@@ -62,6 +82,28 @@
       "enum": [
         "loading",
         "complete"
+      ]
+    },
+    "MutedInfo": {
+      "type": "object",
+      "required": [
+        "muted"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "muted": {
+          "type": "boolean"
+        },
+        "reason": {
+          "$ref": "#/definitions/MutedInfoReason"
+        }
+      }
+    },
+    "MutedInfoReason": {
+      "enum": [
+        "user",
+        "capture",
+        "exntension"
       ]
     },
     "TabActivated": {
@@ -307,7 +349,6 @@
     },
     "ChangeInfo": {
       "type": "object",
-      "required": [],
       "additionalProperties": false,
       "properties": {
         "status": {

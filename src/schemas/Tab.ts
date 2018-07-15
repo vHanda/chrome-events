@@ -6,6 +6,11 @@
 
 /**
  * This interface was referenced by `TabSchema`'s JSON-Schema
+ * via the `definition` "MutedInfoReason".
+ */
+export type MutedInfoReason = "user" | "capture" | "exntension";
+/**
+ * This interface was referenced by `TabSchema`'s JSON-Schema
  * via the `definition` "TabStatus".
  */
 export type TabStatus = "loading" | "complete";
@@ -18,17 +23,32 @@ export interface TabSchema {
  * via the `definition` "Tab".
  */
 export interface Tab {
-  id: number;
+  id?: number;
   index: number;
   windowId: number;
+  openerId?: number;
   highlighted: boolean;
   active: boolean;
   pinned: boolean;
-  url: string;
-  title: string;
+  audible?: boolean;
+  discarded: boolean;
+  autoDiscardable: boolean;
+  mutedInfo?: MutedInfo;
+  url?: string;
+  title?: string;
+  faviconUrl?: string;
+  status?: TabStatus;
   incognito: boolean;
-  audible: boolean;
-  status: TabStatus;
+  width?: number;
+  height?: number;
+}
+/**
+ * This interface was referenced by `TabSchema`'s JSON-Schema
+ * via the `definition` "MutedInfo".
+ */
+export interface MutedInfo {
+  muted: boolean;
+  reason?: MutedInfoReason;
 }
 /**
  * This interface was referenced by `TabSchema`'s JSON-Schema
