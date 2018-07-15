@@ -1,0 +1,27 @@
+{
+  "definitions": {
+    "IdleStateChanged": {
+      "type": "object",
+      "required": [
+        "newState",
+        "detectionInterval"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "detectionInterval": {
+          "type": "integer"
+        },
+        "newState": {
+          "$ref": "#/definitions/IdleState"
+        }
+      }
+    },
+    "IdleState": {
+      "enum": [
+        "active",
+        "idle",
+        "locked"
+      ]
+    }
+  }
+}

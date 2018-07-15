@@ -3,6 +3,7 @@ import * as types from "./types";
 import { Tab, TabCreated, ActiveInfo, TabActivated, TabUpdated, TabMoved, TabHighlighted, TabDetached, TabRemoved, TabAttached } from "./schemas/Tab";
 import { Window, WindowCreated, WindowRemoved, WindowFocused } from "./schemas/Window";
 import { Event } from "./schemas/Event";
+import { IdleState, IdleStateChanged } from "./schemas/Idle";
 
 function getTimezoneOffset() {
 	// JS stores
@@ -145,17 +146,28 @@ chrome.windows.onFocusChanged.addListener((windowId: number) => {
 // IDLE
 //
 
-/*
-chrome.idle.setDetectionInterval(30);
+var detectionInterval = 30;
+chrome.idle.setDetectionInterval(detectionInterval);
+
 chrome.idle.onStateChanged.addListener((state) => {
-	if (state == "idle") {
-		var event = createEvent(types.EVENT_TYPE_IDLE_START, null);
-	} else {
-		var event = createEvent(types.EVENT_TYPE_IDLE_STOP, null);
+	// Is there an easier way?
+	var s: IdleState;
+	if (state == "active") {
+		s = state;
+	} else if (state == "idle") {
+		s = state;
+	} else if (state == "locked") {
+		s = state;
 	}
+
+	var data: IdleStateChanged = {
+		detectionInterval: detectionInterval,
+		newState: s,
+	}
+	var event = createEvent(types.EVENT_TYPE_IDLE, data);
 	sendEvent(event);
 });
-*/
+
 
 function sendEvent(event: Event) {
 	console.log("sendEvent", event.eventType, event.eventData);
