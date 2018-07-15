@@ -3,8 +3,8 @@ function msToDate(msecs) {
     return new Date(msecs).toISOString().slice(0, 10);
 }
 
-import { LocalStorage } from "./storage";
-var storage = new LocalStorage();
+import { EventStorage } from "./storage";
+var storage = new EventStorage();
 
 /*
 setTimeout(function () {

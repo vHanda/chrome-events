@@ -4,7 +4,14 @@
         "target": "es6",
         "noImplicitAny": false,
         "sourceMap": true,
-        "rootDir": "src",
+        // Inlcude paths
+        "include": [
+            "src/**/*"
+        ],
+        "exclude": [
+            "node_modules",
+            "**/*.spec.ts"
+        ],
         "outDir": "dist/",
         "noEmitOnError": true
     }

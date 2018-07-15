@@ -1,7 +1,7 @@
 import { Event } from "./schemas/Event";
 
-export class LocalStorage {
-    db: any;
+export class EventStorage {
+    db: IDBDatabase;
 
     constructor() {
         var indexedDB = window.indexedDB;
@@ -11,7 +11,7 @@ export class LocalStorage {
             console.log("Database opened");
             this.db = request.result
         }
-        request.onupgradeneeded = (event) => {
+        request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
             this.db = request.result;
             if (event.oldVersion < 1) {
                 console.log("Created the object store");
@@ -35,7 +35,7 @@ export class LocalStorage {
         var store = tx.objectStore("log");
 
         store.getAll().onsuccess = function (event) {
-            var result = event.target.result;
+            var result = event.target;
             console.log("GOT " + result);
             callback(result);
         };

@@ -1,25 +1,60 @@
 import * as types from "./types";
 
+import { Tab, TabCreated, ActiveInfo, TabActivated } from "./schemas/Tab";
+import { Window } from "./schemas/Window";
+import { Event } from "./schemas/Event";
+
 function getTimezoneOffset() {
 	// JS stores
 	return (new Date()).getTimezoneOffset() * -1 / 60.0;
 }
 
-function createEvent(type, data) {
+function createEvent(type: Number, data): Event {
 	return {
-		type: types.type_to_string(type),
-		t: Date.now(),
+		ts: Date.now(),
 		tz: getTimezoneOffset(),
-		data: data
-	};
+
+		eventType: types.type_to_string(type),
+		eventData: data,
+
+		// FIXME!
+		service: "chrome",
+		machineID: "1",
+	}
 }
 
-// FIXME: Connect each chrome.tabs events!
-chrome.tabs.onActivated.addListener((activeInfo) => {
-	var event = createEvent(types.EVENT_TYPE_TAB_ACTIVATED, activeInfo);
+chrome.tabs.onCreated.addListener((t) => {
+	var tab: Tab = {
+		id: t.id,
+		index: t.index,
+		windowId: t.windowId,
+		highlighted: t.highlighted,
+		active: t.active,
+		pinned: t.pinned,
+		url: t.url,
+		title: t.title,
+		incognito: t.incognito,
+		audible: t.audible,
+		status: t.status == 'loading' ? "loading" : "complete",
+	}
+	var eventData: TabCreated = {
+		tab: tab,
+	};
+
+	var event = createEvent(types.EVENT_TYPE_TAB_ACTIVATED, eventData);
 	sendEvent(event);
 });
 
+chrome.tabs.onActivated.addListener((activeInfo) => {
+	var eventData: TabActivated = {
+		activeInfo: activeInfo,
+	};
+
+	var event = createEvent(types.EVENT_TYPE_TAB_ACTIVATED, eventData);
+	sendEvent(event);
+});
+
+/*
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 	var data = {
 		tabId: tabId,
@@ -59,8 +94,8 @@ function sendEvent(event: Event) {
 	storage.save(event);
 }
 
-import { LocalStorage } from "./storage";
-var storage = new LocalStorage();
+import { EventStorage } from "./storage";
+var storage = new EventStorage();
 
 
 // Notes:
