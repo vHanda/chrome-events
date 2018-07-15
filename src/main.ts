@@ -1,6 +1,6 @@
 import * as types from "./types";
 
-import { Tab, TabCreated, ActiveInfo, TabActivated } from "./schemas/Tab";
+import { Tab, TabCreated, ActiveInfo, TabActivated, TabUpdated, TabMoved, TabHighlighted, TabDetached, TabRemoved, TabAttached } from "./schemas/Tab";
 import { Window } from "./schemas/Window";
 import { Event } from "./schemas/Event";
 
@@ -45,6 +45,17 @@ chrome.tabs.onCreated.addListener((t) => {
 	sendEvent(event);
 });
 
+// FIXME: The tab?
+chrome.tabs.onUpdated.addListener((tabId: number, changeInfo, tab) => {
+	var eventData: TabUpdated = {
+		tabId: tabId,
+		changeInfo: changeInfo,
+	};
+
+	var event = createEvent(types.EVENT_TYPE_TAB_UPDATED, eventData);
+	sendEvent(event);
+});
+
 chrome.tabs.onActivated.addListener((activeInfo) => {
 	var eventData: TabActivated = {
 		activeInfo: activeInfo,
@@ -54,17 +65,54 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 	sendEvent(event);
 });
 
-/*
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-	var data = {
+chrome.tabs.onMoved.addListener((tabId: number, moveInfo) => {
+	var eventData: TabMoved = {
 		tabId: tabId,
-		changeInfo: changeInfo,
-		tab: tab
+		moveInfo: moveInfo
 	};
-	var event = createEvent(types.EVENT_TYPE_TAB_UPDATED, data);
+
+	var event = createEvent(types.EVENT_TYPE_TAB_MOVED, eventData);
 	sendEvent(event);
 });
 
+chrome.tabs.onHighlighted.addListener((highlightInfo) => {
+	var data: TabHighlighted = {
+		windowId: highlightInfo.windowId,
+		tabIds: typeof (highlightInfo.tabs) == "number" ? [highlightInfo.tabs] : highlightInfo.tabs,
+	};
+	var event = createEvent(types.EVENT_TYPE_TAB_HIGHLIGHTED, data);
+	sendEvent(event);
+});
+
+chrome.tabs.onDetached.addListener((tabId: number, detachInfo) => {
+	var data: TabDetached = {
+		tabId: tabId,
+		detachInfo: detachInfo,
+	};
+	var event = createEvent(types.EVENT_TYPE_TAB_DETACHED, data);
+	sendEvent(event);
+});
+
+chrome.tabs.onAttached.addListener((tabId: number, attachInfo) => {
+	var data: TabAttached = {
+		tabId: tabId,
+		attachInfo: attachInfo,
+	};
+	var event = createEvent(types.EVENT_TYPE_TAB_ATTACHED, data);
+	sendEvent(event);
+});
+
+chrome.tabs.onRemoved.addListener((tabId: number, removeInfo) => {
+	var data: TabRemoved = {
+		tabId: tabId,
+		removeInfo: removeInfo,
+	};
+	var event = createEvent(types.EVENT_TYPE_TAB_REMOVED, data);
+	sendEvent(event);
+});
+
+
+/*
 // FIXME: Connect each chrome.windows events!
 chrome.windows.onFocusChanged.addListener((windowId) => {
 	if (windowId == chrome.windows.WINDOW_ID_NONE) {

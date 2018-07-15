@@ -1,30 +1,15 @@
 export var EVENT_TYPE_HISTORY_VISITED = 1;
 export var EVENT_TYPE_TAB_ACTIVATED = 2;
-// data = tab
 export var EVENT_TYPE_TAB_UPDATED = 3;
-// data.tab
-//   id
-//   index
-//   active
-//   audible
-//   incognito
-//   highlighted -?
-//   mutedInfo.muted
-//   windowId
-//   title
-//   url
-// data.tabId
-// changeInfo
 export var EVENT_TYPE_WINDOW_FOCUS_LOST = 4;
-// none
 export var EVENT_TYPE_WINDOW_FOCUSED = 5;
-// data.id
-// data.state == maximized
-// date.tabs
 export var EVENT_TYPE_IDLE_START = 6;
-// tabs
 export var EVENT_TYPE_IDLE_STOP = 7;
-// tabs
+export var EVENT_TYPE_TAB_MOVED = 9;
+export var EVENT_TYPE_TAB_HIGHLIGHTED = 10;
+export var EVENT_TYPE_TAB_DETACHED = 11;
+export var EVENT_TYPE_TAB_ATTACHED = 12;
+export var EVENT_TYPE_TAB_REMOVED = 13;
 
 export function type_to_string(type) {
 	switch (type) {
@@ -42,6 +27,16 @@ export function type_to_string(type) {
 			return "EVENT_TYPE_IDLE_START";
 		case EVENT_TYPE_IDLE_STOP:
 			return "EVENT_TYPE_IDLE_STOP";
+		case EVENT_TYPE_TAB_MOVED:
+			return "EVENT_TYPE_TYPE_MOVED";
+		case EVENT_TYPE_TAB_HIGHLIGHTED:
+			return "EVENT_TYPE_TYPE_HIGHLIGHTED";
+		case EVENT_TYPE_TAB_DETACHED:
+			return "EVENT_TYPE_TYPE_DETACHED";
+		case EVENT_TYPE_TAB_ATTACHED:
+			return "EVENT_TYPE_TYPE_ATACHED";
+		case EVENT_TYPE_TAB_REMOVED:
+			return "EVENT_TYPE_TAB_REMOVED";
 		default:
 			return "UNKNOWN";
 	}

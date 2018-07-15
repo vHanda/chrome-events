@@ -99,10 +99,16 @@
     "TabAttached": {
       "type": "object",
       "required": [
+        "tabId",
         "attachInfo"
       ],
       "additionalProperties": false,
       "properties": {
+        "tabId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
         "attachInfo": {
           "$ref": "#/definitions/AttachInfo"
         }
@@ -143,10 +149,16 @@
     "TabDetached": {
       "type": "object",
       "required": [
+        "tabId",
         "detachInfo"
       ],
       "additionalProperties": false,
       "properties": {
+        "tabId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
         "detachInfo": {
           "$ref": "#/definitions/DetachInfo"
         }
@@ -175,10 +187,16 @@
     "TabHighlighted": {
       "type": "object",
       "required": [
+        "windowId",
         "tabIds"
       ],
       "additionalProperties": false,
       "properties": {
+        "windowId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
         "tabIds": {
           "type": "array",
           "items": {
@@ -192,10 +210,16 @@
     "TabMoved": {
       "type": "object",
       "required": [
+        "tabId",
         "moveInfo"
       ],
       "additionalProperties": false,
       "properties": {
+        "tabId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
         "moveInfo": {
           "$ref": "#/definitions/MoveInfo"
         }
@@ -230,10 +254,16 @@
     "TabRemoved": {
       "type": "object",
       "required": [
+        "tabId",
         "removeInfo"
       ],
       "additionalProperties": false,
       "properties": {
+        "tabId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
         "removeInfo": {
           "$ref": "#/definitions/RemoveInfo"
         }
@@ -260,10 +290,16 @@
     "TabUpdated": {
       "type": "object",
       "required": [
+        "tabId",
         "changeInfo"
       ],
       "additionalProperties": false,
       "properties": {
+        "tabId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
         "changeInfo": {
           "$ref": "#/definitions/ChangeInfo"
         }
@@ -271,13 +307,7 @@
     },
     "ChangeInfo": {
       "type": "object",
-      "required": [
-        "status",
-        "url",
-        "title",
-        "pinned",
-        "audible"
-      ],
+      "required": [],
       "additionalProperties": false,
       "properties": {
         "status": {

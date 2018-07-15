@@ -50,6 +50,7 @@ export interface ActiveInfo {
  * via the `definition` "TabAttached".
  */
 export interface TabAttached {
+  tabId: number;
   attachInfo: AttachInfo;
 }
 /**
@@ -72,6 +73,7 @@ export interface TabCreated {
  * via the `definition` "TabDetached".
  */
 export interface TabDetached {
+  tabId: number;
   detachInfo: DetachInfo;
 }
 /**
@@ -87,6 +89,7 @@ export interface DetachInfo {
  * via the `definition` "TabHighlighted".
  */
 export interface TabHighlighted {
+  windowId: number;
   tabIds: number[];
 }
 /**
@@ -94,6 +97,7 @@ export interface TabHighlighted {
  * via the `definition` "TabMoved".
  */
 export interface TabMoved {
+  tabId: number;
   moveInfo: MoveInfo;
 }
 /**
@@ -110,6 +114,7 @@ export interface MoveInfo {
  * via the `definition` "TabRemoved".
  */
 export interface TabRemoved {
+  tabId: number;
   removeInfo: RemoveInfo;
 }
 /**
@@ -125,6 +130,7 @@ export interface RemoveInfo {
  * via the `definition` "TabUpdated".
  */
 export interface TabUpdated {
+  tabId: number;
   changeInfo: ChangeInfo;
 }
 /**
@@ -132,9 +138,9 @@ export interface TabUpdated {
  * via the `definition` "ChangeInfo".
  */
 export interface ChangeInfo {
-  status: string;
-  url: string;
-  title: string;
-  pinned: boolean;
-  audible: boolean;
+  status?: string;
+  url?: string;
+  title?: string;
+  pinned?: boolean;
+  audible?: boolean;
 }
