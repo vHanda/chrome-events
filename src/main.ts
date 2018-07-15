@@ -1,4 +1,4 @@
-import * as types from "./types";
+import { EventType } from "./EventType";
 
 import { Tab, MutedInfoReason, TabCreated, ActiveInfo, TabActivated, TabUpdated, TabMoved, TabHighlighted, TabDetached, TabRemoved, TabAttached, MutedInfo } from "./schemas/Tab";
 import { Window, WindowCreated, WindowRemoved, WindowFocused } from "./schemas/Window";
@@ -10,12 +10,12 @@ function getTimezoneOffset() {
 	return (new Date()).getTimezoneOffset() * -1 / 60.0;
 }
 
-function createEvent(type: Number, data): Event {
+function createEvent(type: EventType, data): Event {
 	return {
 		ts: Date.now(),
 		tz: getTimezoneOffset(),
 
-		eventType: types.type_to_string(type),
+		eventType: type,
 		eventData: data,
 
 		// FIXME!
@@ -59,7 +59,7 @@ chrome.tabs.onCreated.addListener((t) => {
 		tab: tab,
 	};
 
-	var event = createEvent(types.EVENT_TYPE_TAB_ACTIVATED, eventData);
+	var event = createEvent(EventType.TAB_ACTIVATED, eventData);
 	sendEvent(event);
 });
 
@@ -70,7 +70,7 @@ chrome.tabs.onUpdated.addListener((tabId: number, changeInfo, tab) => {
 		changeInfo: changeInfo,
 	};
 
-	var event = createEvent(types.EVENT_TYPE_TAB_UPDATED, eventData);
+	var event = createEvent(EventType.TAB_UPDATED, eventData);
 	sendEvent(event);
 });
 
@@ -79,7 +79,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 		activeInfo: activeInfo,
 	};
 
-	var event = createEvent(types.EVENT_TYPE_TAB_ACTIVATED, eventData);
+	var event = createEvent(EventType.TAB_ACTIVATED, eventData);
 	sendEvent(event);
 });
 
@@ -89,7 +89,7 @@ chrome.tabs.onMoved.addListener((tabId: number, moveInfo) => {
 		moveInfo: moveInfo
 	};
 
-	var event = createEvent(types.EVENT_TYPE_TAB_MOVED, eventData);
+	var event = createEvent(EventType.TAB_MOVED, eventData);
 	sendEvent(event);
 });
 
@@ -98,7 +98,7 @@ chrome.tabs.onHighlighted.addListener((highlightInfo) => {
 		windowId: highlightInfo.windowId,
 		tabIds: typeof (highlightInfo.tabs) == "number" ? [highlightInfo.tabs] : highlightInfo.tabs,
 	};
-	var event = createEvent(types.EVENT_TYPE_TAB_HIGHLIGHTED, data);
+	var event = createEvent(EventType.TAB_HIGHLIGHTED, data);
 	sendEvent(event);
 });
 
@@ -107,7 +107,7 @@ chrome.tabs.onDetached.addListener((tabId: number, detachInfo) => {
 		tabId: tabId,
 		detachInfo: detachInfo,
 	};
-	var event = createEvent(types.EVENT_TYPE_TAB_DETACHED, data);
+	var event = createEvent(EventType.TAB_DETACHED, data);
 	sendEvent(event);
 });
 
@@ -116,7 +116,7 @@ chrome.tabs.onAttached.addListener((tabId: number, attachInfo) => {
 		tabId: tabId,
 		attachInfo: attachInfo,
 	};
-	var event = createEvent(types.EVENT_TYPE_TAB_ATTACHED, data);
+	var event = createEvent(EventType.TAB_ATTACHED, data);
 	sendEvent(event);
 });
 
@@ -125,7 +125,7 @@ chrome.tabs.onRemoved.addListener((tabId: number, removeInfo) => {
 		tabId: tabId,
 		removeInfo: removeInfo,
 	};
-	var event = createEvent(types.EVENT_TYPE_TAB_REMOVED, data);
+	var event = createEvent(EventType.TAB_REMOVED, data);
 	sendEvent(event);
 });
 
@@ -138,7 +138,7 @@ chrome.windows.onCreated.addListener((window) => {
 	var data: WindowCreated = {
 		window: window
 	};
-	var event = createEvent(types.EVENT_TYPE_WINDOW_CREATED, data);
+	var event = createEvent(EventType.WINDOW_CREATED, data);
 	sendEvent(event);
 });
 
@@ -146,7 +146,7 @@ chrome.windows.onRemoved.addListener((windowId: number) => {
 	var data: WindowRemoved = {
 		id: windowId
 	};
-	var event = createEvent(types.EVENT_TYPE_TAB_REMOVED, data);
+	var event = createEvent(EventType.WINDOW_REMOVED, data);
 	sendEvent(event);
 });
 
@@ -155,7 +155,7 @@ chrome.windows.onFocusChanged.addListener((windowId: number) => {
 		id: windowId
 	};
 
-	var event = createEvent(types.EVENT_TYPE_WINDOW_FOCUSED, null);
+	var event = createEvent(EventType.WINDOW_FOCUSED, null);
 	sendEvent(event);
 });
 
@@ -181,7 +181,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 		detectionInterval: detectionInterval,
 		newState: s,
 	}
-	var event = createEvent(types.EVENT_TYPE_IDLE, data);
+	var event = createEvent(EventType.IDLE, data);
 	sendEvent(event);
 });
 

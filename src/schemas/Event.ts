@@ -15,7 +15,7 @@ export interface Event {
   ts: number;
   tz: number;
   service: string;
-  machineID: string;
+  machineID?: string;
   eventType: string;
   eventData: null | string;
 }
