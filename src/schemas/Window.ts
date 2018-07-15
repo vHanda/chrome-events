@@ -13,7 +13,12 @@ export type WindowType = "normal" | "popup" | "panel" | "app" | "devtools";
  * This interface was referenced by `WindowSchema`'s JSON-Schema
  * via the `definition` "WindowState".
  */
-export type WindowState = "normal" | "minimized" | "maximized" | "fullscreen" | "docked";
+export type WindowState =
+  | "normal"
+  | "minimized"
+  | "maximized"
+  | "fullscreen"
+  | "docked";
 
 export interface WindowSchema {
   [k: string]: any;

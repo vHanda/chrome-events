@@ -2,6 +2,9 @@
   "name": "chrome-events",
   "version": "1.0.0",
   "description": "",
+  "scripts": {
+    "prettier": "prettier --write ./**/*.ts"
+  },
   "dependencies": {
     "@types/plotly.js": "^1.38.3"
   },
@@ -9,11 +12,9 @@
     "@types/chrome": "0.0.69",
     "awesome-typescript-loader": "^5.2.0",
     "json-schema-to-typescript": "^5.5.0",
+    "prettier": "^1.13.7",
     "source-map-loader": "^0.2.3",
     "typescript": "^2.9.2"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

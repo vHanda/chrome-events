@@ -1,56 +1,56 @@
 import { Event } from "./schemas/Event";
 
 export class EventStorage {
-    db: IDBDatabase;
+  db: IDBDatabase;
 
-    constructor() {
-        var indexedDB = window.indexedDB;
+  constructor() {
+    var indexedDB = window.indexedDB;
 
-        var request = indexedDB.open("logdb", 1);
-        request.onsuccess = () => {
-            console.log("Database opened");
-            this.db = request.result
-        }
-        request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
-            this.db = request.result;
-            if (event.oldVersion < 1) {
-                console.log("Created the object store");
-                var store = this.db.createObjectStore("log", { keyPath: "ts" });
-            }
-        }
-    }
+    var request = indexedDB.open("logdb", 1);
+    request.onsuccess = () => {
+      console.log("Database opened");
+      this.db = request.result;
+    };
+    request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
+      this.db = request.result;
+      if (event.oldVersion < 1) {
+        console.log("Created the object store");
+        var store = this.db.createObjectStore("log", { keyPath: "ts" });
+      }
+    };
+  }
 
-    save(event: Event) {
-        // FIXME: Let's commit this every x seconds!
-        var tx = this.db.transaction("log", "readwrite");
-        var store = tx.objectStore("log");
+  save(event: Event) {
+    // FIXME: Let's commit this every x seconds!
+    var tx = this.db.transaction("log", "readwrite");
+    var store = tx.objectStore("log");
 
-        console.log("Saving", event);
-        store.put(event)
-    }
+    console.log("Saving", event);
+    store.put(event);
+  }
 
-    // FIXME: This is shitty. It would be better to explicity specify a range!
-    getAll(callback) {
-        var tx = this.db.transaction("log", "readonly");
-        var store = tx.objectStore("log");
+  // FIXME: This is shitty. It would be better to explicity specify a range!
+  getAll(callback) {
+    var tx = this.db.transaction("log", "readonly");
+    var store = tx.objectStore("log");
 
-        store.getAll().onsuccess = function (event) {
-            var result = event.target;
-            console.log("GOT " + result);
-            callback(result);
-        };
-    }
+    store.getAll().onsuccess = function(event) {
+      var result = event.target;
+      console.log("GOT " + result);
+      callback(result);
+    };
+  }
 
-    clear(callback) {
-        callback = callback || function () { };
+  clear(callback) {
+    callback = callback || function() {};
 
-        const tx = this.db.transaction("log", "readwrite");
-        const store = tx.objectStore("log");
-        store.clear().onsuccess = event => {
-            console.log("Cleared store", event);
-            callback();
-        }
+    const tx = this.db.transaction("log", "readwrite");
+    const store = tx.objectStore("log");
+    store.clear().onsuccess = event => {
+      console.log("Cleared store", event);
+      callback();
+    };
 
-        // FIXME: Handle errors!
-    }
+    // FIXME: Handle errors!
+  }
 }

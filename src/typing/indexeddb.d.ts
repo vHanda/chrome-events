@@ -3,5 +3,5 @@
 // https://github.com/Microsoft/TypeScript/issues/24724
 
 interface IDBObjectStore {
-    getAll(): IDBRequest;
+  getAll(): IDBRequest;
 }
