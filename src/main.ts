@@ -155,7 +155,7 @@ chrome.windows.onFocusChanged.addListener((windowId: number) => {
 		id: windowId
 	};
 
-	var event = createEvent(EventType.WINDOW_FOCUSED, null);
+	var event = createEvent(EventType.WINDOW_FOCUSED, data);
 	sendEvent(event);
 });
 
