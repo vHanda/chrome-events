@@ -14,7 +14,7 @@ import (
 type ChromeEvent struct {
 	Type string                 `json:"Type"`
 	TZ   int64                  `json:"tz"`
-	T    int                    `json:"t"`
+	TS   int                    `json:"ts"`
 	Data map[string]interface{} `json:"data"`
 }
 

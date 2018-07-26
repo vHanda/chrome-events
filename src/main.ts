@@ -4,7 +4,6 @@ import {
   Tab,
   MutedInfoReason,
   TabCreated,
-  ActiveInfo,
   TabActivated,
   TabUpdated,
   TabMoved,
@@ -14,12 +13,7 @@ import {
   TabAttached,
   MutedInfo
 } from "./schemas/Tab";
-import {
-  Window,
-  WindowCreated,
-  WindowRemoved,
-  WindowFocused
-} from "./schemas/Window";
+import { WindowCreated, WindowRemoved, WindowFocused } from "./schemas/Window";
 import { Event } from "./schemas/Event";
 import { IdleState, IdleStateChanged } from "./schemas/Idle";
 
@@ -28,7 +22,7 @@ function getTimezoneOffset() {
   return (new Date().getTimezoneOffset() * -1) / 60.0;
 }
 
-function createEvent(type: EventType, data): Event {
+function createEvent(type: EventType, data: any): Event {
   return {
     ts: Date.now(),
     tz: getTimezoneOffset(),
@@ -42,8 +36,10 @@ function createEvent(type: EventType, data): Event {
 }
 
 chrome.tabs.onCreated.addListener(t => {
-  var reason: MutedInfoReason;
-  var r = t.mutedInfo.reason;
+  // FIXME: How to resolve this default value!
+  var reason: MutedInfoReason = "exntension";
+
+  var r = t.mutedInfo ? t.mutedInfo.reason : "";
   if (r == "user") {
     reason = "user";
   } else if (r == "capture") {
@@ -52,7 +48,7 @@ chrome.tabs.onCreated.addListener(t => {
     reason = "exntension";
   }
   var mutedInfo: MutedInfo = {
-    muted: t.mutedInfo.muted,
+    muted: t.mutedInfo ? t.mutedInfo.muted : false,
     reason: reason
   };
 
@@ -113,7 +109,7 @@ chrome.tabs.onMoved.addListener((tabId: number, moveInfo) => {
 
 chrome.tabs.onHighlighted.addListener(highlightInfo => {
   var data: TabHighlighted = {
-    windowId: highlightInfo.windowId,
+    windowId: highlightInfo.windowId ? highlightInfo.windowId : 0,
     tabIds:
       typeof highlightInfo.tabs == "number"
         ? [highlightInfo.tabs]
@@ -188,7 +184,7 @@ chrome.idle.setDetectionInterval(detectionInterval);
 
 chrome.idle.onStateChanged.addListener(state => {
   // Is there an easier way?
-  var s: IdleState;
+  var s: IdleState = "active";
   if (state == "active") {
     s = state;
   } else if (state == "idle") {
@@ -212,6 +208,7 @@ function sendEvent(event: Event) {
 
 import { EventStorage } from "./storage";
 var storage = new EventStorage();
+storage.setup();
 
 // Notes:
 // These events are not perfect and we will need additional events
@@ -222,7 +219,8 @@ var storage = new EventStorage();
 // Perhaps I can just run a local webserver and send all the events there?
 // That can have the append only log - use nedb-logger
 
-function sendEventsToServer(events, cb) {
+// FIXME: Convrt to an async function!
+function sendEventsToServer(events: Event[], cb: any) {
   const chromeEvents = {
     id: "boo",
     events: events
@@ -242,19 +240,18 @@ function sendEventsToServer(events, cb) {
     });
 }
 
-function sync() {
-  storage.getAll(events => {
-    if (events.length == 0) {
+async function sync() {
+  const events = await storage.getAll();
+  if (events.length == 0) {
+    return;
+  }
+
+  console.log("Sending", events.length);
+  sendEventsToServer(events, async (err: Error) => {
+    if (err) {
       return;
     }
-
-    console.log("Sending", events.length);
-    sendEventsToServer(events, err => {
-      if (err) {
-        return;
-      }
-      storage.clear(() => {});
-    });
+    await storage.clear();
   });
 }
 

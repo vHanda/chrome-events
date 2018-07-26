@@ -1,56 +1,33 @@
+import idb from "idb";
+import * as IDB from "idb";
+
 import { Event } from "./schemas/Event";
 
 export class EventStorage {
-  db: IDBDatabase;
+  db!: IDB.DB;
 
-  constructor() {
-    var indexedDB = window.indexedDB;
-
-    var request = indexedDB.open("logdb", 1);
-    request.onsuccess = () => {
-      console.log("Database opened");
-      this.db = request.result;
-    };
-    request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
-      this.db = request.result;
-      if (event.oldVersion < 1) {
-        console.log("Created the object store");
-        var store = this.db.createObjectStore("log", { keyPath: "ts" });
-      }
-    };
+  async setup() {
+    console.log("called setup");
+    this.db = await idb.open("logdb", 1, upgradeDB => {
+      console.log("Creating the object store");
+      upgradeDB.createObjectStore("log", { keyPath: "ts" });
+    });
   }
 
-  save(event: Event) {
-    // FIXME: Let's commit this every x seconds!
-    var tx = this.db.transaction("log", "readwrite");
-    var store = tx.objectStore("log");
-
-    console.log("Saving", event);
-    store.put(event);
-  }
-
-  // FIXME: This is shitty. It would be better to explicity specify a range!
-  getAll(callback) {
-    var tx = this.db.transaction("log", "readonly");
-    var store = tx.objectStore("log");
-
-    store.getAll().onsuccess = function(event) {
-      var result = event.target;
-      console.log("GOT " + result);
-      callback(result);
-    };
-  }
-
-  clear(callback) {
-    callback = callback || function() {};
-
+  async save(event: Event) {
     const tx = this.db.transaction("log", "readwrite");
-    const store = tx.objectStore("log");
-    store.clear().onsuccess = event => {
-      console.log("Cleared store", event);
-      callback();
-    };
+    tx.objectStore("log").put(event);
+    return tx.complete;
+  }
 
-    // FIXME: Handle errors!
+  getAll(): Promise<Event[]> {
+    const tx = this.db.transaction("log", "readonly");
+    return tx.objectStore("log").getAll();
+  }
+
+  clear() {
+    const tx = this.db.transaction("log", "readwrite");
+    tx.objectStore("log").clear();
+    return tx.complete;
   }
 }
