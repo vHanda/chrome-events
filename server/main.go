@@ -11,11 +11,14 @@ import (
 	"github.com/denisbrodbeck/machineid"
 )
 
+// FIXME: Auto generate this?
 type ChromeEvent struct {
-	Type string                 `json:"Type"`
-	TZ   int64                  `json:"tz"`
-	TS   int                    `json:"ts"`
-	Data map[string]interface{} `json:"data"`
+	TZ float64 `json:"tz"`
+	TS int     `json:"ts"`
+
+	Service   string                 `json:"service"`
+	EventType string                 `json:"eventType"`
+	EventData map[string]interface{} `json:"eventData"`
 }
 
 type ChromeEvents struct {

@@ -222,7 +222,7 @@ storage.setup();
 // FIXME: Convrt to an async function!
 function sendEventsToServer(events: Event[], cb: any) {
   const chromeEvents = {
-    id: "boo",
+    machineID: "",
     events: events
   };
   const url = "http://127.0.0.1:8080/chrome";
