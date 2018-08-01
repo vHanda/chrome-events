@@ -1,105 +1,84 @@
 {
-    "definitions": {
-        "Window": {
-            "type": "object",
-            "required": [
-                "incognito",
-                "focused",
-                "alwaysOnTop"
-            ],
-            "additionalProperties": false,
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                },
-                "windowType": {
-                    "$ref": "#/definitions/WindowType"
-                },
-                "windowState": {
-                    "$ref": "#/definitions/WindowState"
-                },
-                "incognito": {
-                    "type": "boolean"
-                },
-                "focused": {
-                    "type": "boolean"
-                },
-                "top": {
-                    "type": "integer"
-                },
-                "left": {
-                    "type": "integer"
-                },
-                "width": {
-                    "type": "integer"
-                },
-                "height": {
-                    "type": "integer"
-                },
-                "alwaysOnTop": {
-                    "type": "boolean"
-                }
-            }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Window": {
+      "type": "object",
+      "required": ["incognito", "focused", "alwaysOnTop"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
         },
-        "WindowType": {
-            "enum": [
-                "normal",
-                "popup",
-                "panel",
-                "app",
-                "devtools"
-            ]
+        "windowType": {
+          "$ref": "#/definitions/WindowType"
         },
-        "WindowState": {
-            "enum": [
-                "normal",
-                "minimized",
-                "maximized",
-                "fullscreen",
-                "docked"
-            ]
+        "windowState": {
+          "$ref": "#/definitions/WindowState"
         },
-        "WindowCreated": {
-            "type": "object",
-            "required": [
-                "window"
-            ],
-            "additionalProperties": false,
-            "properties": {
-                "window": {
-                    "$ref": "#/definitions/Window"
-                }
-            }
+        "incognito": {
+          "type": "boolean"
         },
-        "WindowFocused": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "additionalProperties": false,
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                }
-            }
+        "focused": {
+          "type": "boolean"
         },
-        "WindowRemoved": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "additionalProperties": false,
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                }
-            }
+        "top": {
+          "type": "integer"
+        },
+        "left": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "alwaysOnTop": {
+          "type": "boolean"
         }
+      }
+    },
+    "WindowType": {
+      "enum": ["normal", "popup", "panel", "app", "devtools"]
+    },
+    "WindowState": {
+      "enum": ["normal", "minimized", "maximized", "fullscreen", "docked"]
+    },
+    "WindowCreated": {
+      "type": "object",
+      "required": ["window"],
+      "additionalProperties": false,
+      "properties": {
+        "window": {
+          "$ref": "#/definitions/Window"
+        }
+      }
+    },
+    "WindowFocused": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    },
+    "WindowRemoved": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
     }
+  }
 }

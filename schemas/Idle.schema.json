@@ -1,11 +1,9 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "IdleStateChanged": {
       "type": "object",
-      "required": [
-        "newState",
-        "detectionInterval"
-      ],
+      "required": ["newState", "detectionInterval"],
       "additionalProperties": false,
       "properties": {
         "detectionInterval": {
@@ -17,11 +15,7 @@
       }
     },
     "IdleState": {
-      "enum": [
-        "active",
-        "idle",
-        "locked"
-      ]
+      "enum": ["active", "idle", "locked"]
     }
   }
 }

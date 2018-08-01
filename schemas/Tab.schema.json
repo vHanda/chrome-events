@@ -1,4 +1,5 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Tab": {
       "type": "object",
@@ -79,16 +80,11 @@
       }
     },
     "TabStatus": {
-      "enum": [
-        "loading",
-        "complete"
-      ]
+      "enum": ["loading", "complete"]
     },
     "MutedInfo": {
       "type": "object",
-      "required": [
-        "muted"
-      ],
+      "required": ["muted"],
       "additionalProperties": false,
       "properties": {
         "muted": {
@@ -100,17 +96,11 @@
       }
     },
     "MutedInfoReason": {
-      "enum": [
-        "user",
-        "capture",
-        "exntension"
-      ]
+      "enum": ["user", "capture", "exntension"]
     },
     "TabActivated": {
       "type": "object",
-      "required": [
-        "activeInfo"
-      ],
+      "required": ["activeInfo"],
       "additionalProperties": false,
       "properties": {
         "activeInfo": {
@@ -120,10 +110,7 @@
     },
     "ActiveInfo": {
       "type": "object",
-      "required": [
-        "tabId",
-        "windowId"
-      ],
+      "required": ["tabId", "windowId"],
       "additionalProperties": false,
       "properties": {
         "tabId": {
@@ -140,10 +127,7 @@
     },
     "TabAttached": {
       "type": "object",
-      "required": [
-        "tabId",
-        "attachInfo"
-      ],
+      "required": ["tabId", "attachInfo"],
       "additionalProperties": false,
       "properties": {
         "tabId": {
@@ -158,10 +142,7 @@
     },
     "AttachInfo": {
       "type": "object",
-      "required": [
-        "newWindowId",
-        "newPosition"
-      ],
+      "required": ["newWindowId", "newPosition"],
       "additionalProperties": false,
       "properties": {
         "newWindowId": {
@@ -179,9 +160,7 @@
     "TabCreated": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "tab"
-      ],
+      "required": ["tab"],
       "properties": {
         "tab": {
           "$ref": "#/definitions/Tab"
@@ -190,10 +169,7 @@
     },
     "TabDetached": {
       "type": "object",
-      "required": [
-        "tabId",
-        "detachInfo"
-      ],
+      "required": ["tabId", "detachInfo"],
       "additionalProperties": false,
       "properties": {
         "tabId": {
@@ -208,10 +184,7 @@
     },
     "DetachInfo": {
       "type": "object",
-      "required": [
-        "oldWindowId",
-        "oldPosition"
-      ],
+      "required": ["oldWindowId", "oldPosition"],
       "additionalProperties": false,
       "properties": {
         "oldWindowId": {
@@ -228,10 +201,7 @@
     },
     "TabHighlighted": {
       "type": "object",
-      "required": [
-        "windowId",
-        "tabIds"
-      ],
+      "required": ["windowId", "tabIds"],
       "additionalProperties": false,
       "properties": {
         "windowId": {
@@ -251,10 +221,7 @@
     },
     "TabMoved": {
       "type": "object",
-      "required": [
-        "tabId",
-        "moveInfo"
-      ],
+      "required": ["tabId", "moveInfo"],
       "additionalProperties": false,
       "properties": {
         "tabId": {
@@ -269,11 +236,7 @@
     },
     "MoveInfo": {
       "type": "object",
-      "required": [
-        "windowId",
-        "fromIndex",
-        "toIndex"
-      ],
+      "required": ["windowId", "fromIndex", "toIndex"],
       "additionalProperties": false,
       "properties": {
         "windowId": {
@@ -295,10 +258,7 @@
     },
     "TabRemoved": {
       "type": "object",
-      "required": [
-        "tabId",
-        "removeInfo"
-      ],
+      "required": ["tabId", "removeInfo"],
       "additionalProperties": false,
       "properties": {
         "tabId": {
@@ -313,10 +273,7 @@
     },
     "RemoveInfo": {
       "type": "object",
-      "required": [
-        "windowId",
-        "isWindowClosing"
-      ],
+      "required": ["windowId", "isWindowClosing"],
       "additionalProperties": false,
       "properties": {
         "windowId": {
@@ -331,10 +288,7 @@
     },
     "TabUpdated": {
       "type": "object",
-      "required": [
-        "tabId",
-        "changeInfo"
-      ],
+      "required": ["tabId", "changeInfo"],
       "additionalProperties": false,
       "properties": {
         "tabId": {
